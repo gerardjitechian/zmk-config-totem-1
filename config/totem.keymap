@@ -25,6 +25,16 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
         };
+
+        del_cmd: del_cmd {
+            compatible = "zmk,behavior-hold-tap";
+            label = "DEL_CMD";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "balanced";
+        };
     };
 
     keymap {
@@ -32,19 +42,37 @@
 
         base {
             bindings = <
-           &kp Q  &kp W  &kp F     &kp P  &kp B        &kp J      &kp L            &kp U          &kp Y    &none
-           &kp A  &kp R  &kp S     &kp T  &kp G        &kp M      &kp N            &kp E          &kp I    &kp O
-&kp LCTRL  &kp Z  &kp X  &kp C     &kp D  &kp V        &kp K      &kp H            &kp COMMA      &kp DOT  &kp FSLH  &kp APOS
-                         &kp LGUI  &mo 2  &kp SPACE    &kp SPACE  &kp RIGHT_SHIFT  &kp RIGHT_ALT
+           &kp Q  &kp W  &kp F                 &kp P  &kp B        &kp J      &kp L  &kp U          &kp Y    &none
+           &kp A  &kp R  &kp S                 &kp T  &kp G        &kp M      &kp N  &kp E          &kp I    &kp O
+&kp LCTRL  &kp Z  &kp X  &kp C                 &kp D  &kp V        &kp K      &kp H  &kp COMMA      &kp DOT  &kp FSLH  &kp APOS
+                         &del_cmd LGUI DELETE  &mo 1  &kp SPACE    &kp ENTER  &mo 2  &kp RIGHT_ALT
             >;
         };
 
         NAV {
             bindings = <
-              &none             &none           &kp UP_ARROW    &none      &kp LEFT_BRACE          &kp RIGHT_BRACE        &kp KP_NUMBER_7  &bt BT_SEL 2     &kp KP_NUMBER_9  &kp KP_NUMBER_0
-              &kp LEFT_SHIFT    &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT  &kp LEFT_BRACKET        &kp RIGHT_BRACKET      &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_MINUS
-&kp LEFT_ALT  &kp LEFT_COMMAND  &kp KP_MINUS    &none           &none      &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_ASTERISK  &kp KP_PLUS
-                                                &none           &none      &none                   &none                  &none            &kp KP_DOT
+              &none             &none           &kp UP_ARROW    &none        &kp LEFT_BRACE          &kp RIGHT_BRACE        &kp KP_NUMBER_7  &bt BT_SEL 2     &kp KP_NUMBER_9  &kp KP_NUMBER_0
+              &kp LEFT_SHIFT    &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT    &kp LEFT_BRACKET        &kp RIGHT_BRACKET      &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_MINUS
+&kp LEFT_ALT  &kp LEFT_COMMAND  &kp KP_MINUS    &none           &kp KP_PLUS  &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_ASTERISK  &kp KP_PLUS
+                                                &none           &trans       &none                   &none                  &none            &kp KP_DOT
+            >;
+        };
+
+        SYM {
+            bindings = <
+       &kp EXCLAMATION  &kp AT_SIGN  &kp POUND  &kp DOLLAR  &kp PERCENT    &kp CARET     &kp AMPERSAND  &kp ASTRK  &kp APOSTROPHE  &kp DOUBLE_QUOTES
+       &none            &none        &none      &none       &none          &none         &none          &none      &none           &none
+&none  &none            &none        &none      &none       &none          &kp KP_MINUS  &kp EQUAL      &none      &none           &none              &kp HOME
+                                     &none      &none       &none          &none         &trans         &none
+            >;
+        };
+
+        FUN {
+            bindings = <
+        &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp F6        &kp F7     &kp F8  &kp F9  &kp F10
+        &none   &none   &none   &none   &none     &none         &none      &none   &none   &kp F11
+&trans  &none   &none   &none   &none   &none     &kp KP_MINUS  &kp EQUAL  &none   &none   &kp F12  &none
+                        &none   &none   &none     &none         &trans     &none
             >;
         };
 
@@ -56,8 +84,6 @@
                                                 &trans                 &trans            &trans            &none    &kp RIGHT_SHIFT  &none
             >;
         };
-
-        FUN { status = "reserved"; };
 
         device {
             bindings = <
@@ -84,8 +110,8 @@
         compatible = "zmk,conditional-layers";
 
         device {
-            if-layers = <2 2>;
-            then-layer = <6>;
+            if-layers = <4 4>;
+            then-layer = <7>;
         };
     };
 };
