@@ -16,9 +16,9 @@
 
 / {
     behaviors {
-        esc_fn: esc_fn {
+        tapKP_holdMO_prefTAP: tapKP_holdMO_prefTAP {
             compatible = "zmk,behavior-hold-tap";
-            label = "ESC_FN";
+            label = "TAPKP_HOLDMO_PREFTAP";
             bindings = <&mo>, <&kp>;
 
             #binding-cells = <2>;
@@ -26,9 +26,29 @@
             tapping-term-ms = <200>;
         };
 
-        del_cmd: del_cmd {
+        tapKP_holdKP_prefTAP: tapKP_holdKP_prefTAP {
             compatible = "zmk,behavior-hold-tap";
-            label = "DEL_CMD";
+            label = "TAPKP_HOLDKP_PREFTAP";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
+
+        tapKP_holdKP_prefHOLD: tapKP_holdKP_prefHOLD {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TAPKP_HOLDKP_PREFHOLD";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "hold-preferred";
+        };
+
+        tapKP_holdKP_prefBAL: tapKP_holdKP_prefBAL {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TAPKP_HOLDKP_PREFBAL";
             bindings = <&kp>, <&kp>;
 
             #binding-cells = <2>;
@@ -42,10 +62,10 @@
 
         base {
             bindings = <
-           &kp Q  &kp W  &kp F                 &kp P  &kp B        &kp J      &kp L  &kp U          &kp Y    &none
-           &kp A  &kp R  &kp S                 &kp T  &kp G        &kp M      &kp N  &kp E          &kp I    &kp O
-&kp LCTRL  &kp Z  &kp X  &kp C                 &kp D  &kp V        &kp K      &kp H  &kp COMMA      &kp DOT  &kp FSLH  &kp APOS
-                         &del_cmd LGUI DELETE  &mo 1  &kp SPACE    &kp ENTER  &mo 2  &kp RIGHT_ALT
+                                &kp Q                                 &kp W                             &kp F                                      &kp P                               &kp B        &kp J      &kp L                                &kp U                                  &kp Y                              &kp SEMICOLON
+                                &tapKP_holdKP_prefTAP LEFT_COMMAND A  &tapKP_holdKP_prefTAP LEFT_ALT R  &tapKP_holdKP_prefTAP LEFT_CONTROL S       &tapKP_holdKP_prefBAL LEFT_SHIFT T  &kp G        &kp M      &tapKP_holdKP_prefBAL RIGHT_SHIFT N  &tapKP_holdKP_prefTAP RIGHT_CONTROL E  &tapKP_holdKP_prefTAP RIGHT_ALT I  &tapKP_holdKP_prefBAL RIGHT_COMMAND O
+&tapKP_holdMO_prefTAP 3 ESCAPE  &kp Z                                 &kp X                             &kp C                                      &kp D                               &kp V        &kp K      &kp H                                &kp COMMA                              &kp DOT                            &kp QUESTION                           &kp APOS
+                                                                                                        &tapKP_holdKP_prefBAL LEFT_COMMAND DELETE  &tapKP_holdMO_prefTAP 1 TAB         &kp SPACE    &kp ENTER  &tapKP_holdMO_prefTAP 2 BACKSPACE    &kp MINUS
             >;
         };
 
